@@ -20,7 +20,7 @@ class Role extends CI_Controller {
 	 */
 	public function index()
 	{
-		echo "Company Controller";
+		$this->load->template('role/index','',1);
 	}
     public function dashboard(){
         echo "Dashboard";
