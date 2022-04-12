@@ -20,7 +20,16 @@ class Company extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->template('company/index','',1);
+		$role_id = 1;
+		$condition = "me_menu_access.RoleID =" . "'" . $role_id . "' and me_menu.MenuLink='company' and me_menu_access.view_access =1";
+        $data["access"] = $this->menumodal->ShowMenuBySearch($condition);
+		if(!empty($data["access"])){
+			$this->load->template('company/index',$data,1);
+		}
+		else{
+			$this->load->template('error/permission',$data,1);
+		}
+		
 	}
 	public function response(){
 		$draw = intval($this->input->get("draw"));
@@ -48,6 +57,16 @@ class Company extends CI_Controller {
 		);
 		echo json_encode($result);
 	}
-
+	public function add(){
+		$role_id = 1;
+		$condition = "me_menu_access.RoleID =" . "'" . $role_id . "' and me_menu.MenuLink='company' and me_menu_access.add_access =1";
+        $data["access"] = $this->menumodal->ShowMenuBySearch($condition);
+		if(!empty($data["access"])){
+			$this->load->template('company/add',$data,1);
+		}
+		else{
+			$this->load->template('error/permission',$data,1);
+		}
+	}
 	
 }

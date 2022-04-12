@@ -51,7 +51,8 @@ class Home extends CI_Controller {
 		force_download($db_name, $backup);
 	}
 	public function restore(){
-		$sql_filename = 'me_crm_db.sql';
+		$this->load->template('backup/restore','',1);
+		/*$sql_filename = 'me_crm_db.sql';
 		$sql_contents = file_get_contents($sql_filename);
     	$sql_contents = explode(";", $sql_contents);
 		foreach($sql_contents as $query)
@@ -68,7 +69,28 @@ class Home extends CI_Controller {
 				continue;
 			}
 
-		}
+		}*/
 
+	}
+	public function restore_progress(){
+		$sql_contents = file_get_contents($_FILES["file"]["name"]);
+		$sql_contents = explode(";", $sql_contents);
+		$this->db->query("SET foreign_key_checks = 0");
+		foreach($sql_contents as $query)
+		{
+
+			$pos = strpos($query,'ci_sessions');
+			var_dump($pos);
+			if($pos == false)
+			{
+				$result = $this->db->query($query);
+			}
+			else
+			{
+				continue;
+			}
+
+		}
+		$this->db->query("SET foreign_key_checks = 1");
 	}
 }

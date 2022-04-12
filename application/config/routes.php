@@ -56,3 +56,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['dashboard'] = 'Home/dashboard';
 $route['login'] = 'Login/login';
 $route['back-up'] = 'home/backup';
+$route['restore'] = 'home/restore';

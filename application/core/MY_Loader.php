@@ -120,6 +120,7 @@ class MY_Loader extends CI_Loader {
         'Lock_screen'=> "Lock screen",
         'Logout'=> "Logout",
         'Extra_pages'=> "Extra pages",
+        'If_several_languages_coalesce_the_grammar' => "If several languages ​​coalesce the grammar",
         'Utility'=> "Utility");
         $this->ci =& get_instance();
         $this->ci->load->model('MenuModal');

@@ -11,6 +11,13 @@ class CompanyModal extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
+    public function ShowCompanyBySearch($array){
+        $this->db->select('*');
+        $this->db->from("me_company");
+        $this->db->where($array);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
 
 ?>

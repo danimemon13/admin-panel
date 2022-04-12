@@ -369,6 +369,7 @@ File: Main Js File
     }
 
     function init() {
+        
         initMetisMenu();
         initCounterNumber();
         initLeftMenuCollapse();

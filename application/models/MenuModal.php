@@ -5,6 +5,14 @@ class MenuModal extends CI_Model {
     public function EditMenu(){}
     public function DeleteMenu(){}
     public function ShowMenu(){}
+    public function ShowMenuBySearch($array){
+        $this->db->select('me_menu.MenuID, me_menu.MenuName, me_menu.MenuLink,me_menu.MenuIcon,me_menu.MenuChild,me_menu.MenuParent');
+		$this->db->from('me_menu');
+		$this->db->join('me_menu_access','me_menu_access.MenuID=me_menu.MenuID'); 
+		$this->db->where($array);
+		$query = $this->db->get();
+        return $query->result_array();
+    }
     public function main_menu($role_id) {
         // Select all entries from the menu table
         //$query = $this->db->query("select id, name, link,icon,is_child,parent from " . $this->category);
