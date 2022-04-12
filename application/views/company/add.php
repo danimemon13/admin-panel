@@ -36,7 +36,7 @@
                                         <div>
                                             <div class="mb-3">
                                                 <label for="example-text-input" class="form-label">Company Name</label>
-                                                <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                                <input class="form-control" type="text" value="" id="example-text-input">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="example-email-input" class="form-label">Company Address</label>
@@ -44,10 +44,13 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="example-url-input" class="form-label">Company Logo</label>
-                                                <input class="form-control" type="file" id="example-url-input">
+                                                <input accept="image/*" id="imgInp" class="form-control" type="file" id="example-url-input">
                                             </div>
                                             <div class="mb-3">
-                                                <img class="img-thumbnail" alt="200x200" width="200" src="<?=base_url()?>assets/images/nopreview.jpg" data-holder-rendered="true">
+                                                <img id="thumbnail" class="img-thumbnail" alt="200x200" width="200" src="<?=base_url()?>assets/images/nopreview.jpg" data-holder-rendered="true">
+                                            </div>
+                                            <div class="mb-3">
+                                                <button class="btn btn-primary w-md">Submit</button>
                                             </div>
                                         </div>
                                     </div>

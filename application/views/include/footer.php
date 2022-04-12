@@ -39,6 +39,12 @@
 <script src="<?=base_url()?>assets/js/app.js"></script>
 <script>
     $(document).ready(function() {
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                thumbnail.src = URL.createObjectURL(file)
+            }
+            }
         //Buttons examples
         var table = $('#datatable-company').DataTable({
             "ajax": "<?=base_url()?>company/response",
