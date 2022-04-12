@@ -27,7 +27,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title"><a class="btn btn-primary waves-effect waves-light" href="<?=base_url()?>company/add">Add New Company</a></h4>
+                                <h4 class="card-title">Company Details</h4>
                             </div>
                             <div class="card-body p-4">
                                 <div class="row">
@@ -35,38 +35,20 @@
                                     <div class="col-lg-4">
                                         <div>
                                             <div class="mb-3">
-                                                <label for="example-text-input" class="form-label">Text</label>
+                                                <label for="example-text-input" class="form-label">Company Name</label>
                                                 <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="example-search-input" class="form-label">Search</label>
-                                                <input class="form-control" type="search" value="How do I shoot web" id="example-search-input">
+                                                <label for="example-email-input" class="form-label">Company Address</label>
+                                                <textarea class="form-control"></textarea>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="example-email-input" class="form-label">Email</label>
-                                                <input class="form-control" type="email" value="bootstrap@example.com" id="example-email-input">
+                                                <label for="example-url-input" class="form-label">Company Logo</label>
+                                                <input class="form-control" type="file" id="example-url-input">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="example-url-input" class="form-label">URL</label>
-                                                <input class="form-control" type="url" value="https://getbootstrap.com" id="example-url-input">
+                                                <img class="img-thumbnail" alt="200x200" width="200" src="<?=base_url()?>assets/images/nopreview.jpg" data-holder-rendered="true">
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="example-tel-input" class="form-label">Telephone</label>
-                                                <input class="form-control" type="tel" value="1-(555)-555-5555" id="example-tel-input">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="example-password-input" class="form-label">Password</label>
-                                                <input class="form-control" type="password" value="hunter2" id="example-password-input">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="example-number-input" class="form-label">Number</label>
-                                                <input class="form-control" type="number" value="42" id="example-number-input">
-                                            </div>
-                                            <div>
-                                                <label for="example-datetime-local-input" class="form-label">Date and time</label>
-                                                <input class="form-control" type="datetime-local" value="2019-08-19T13:45:00" id="example-datetime-local-input">
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
