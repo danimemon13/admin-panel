@@ -30,31 +30,33 @@
                                 <h4 class="card-title">Company Details</h4>
                             </div>
                             <div class="card-body p-4">
-                                <div class="row">
-                                    <div class="col-lg-4"></div>
-                                    <div class="col-lg-4">
-                                        <div>
-                                            <div class="mb-3">
-                                                <label for="example-text-input" class="form-label">Company Name</label>
-                                                <input class="form-control" type="text" value="" id="example-text-input">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="example-email-input" class="form-label">Company Address</label>
-                                                <textarea class="form-control"></textarea>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="example-url-input" class="form-label">Company Logo</label>
-                                                <input accept="image/*" id="imgInp" class="form-control" type="file" id="example-url-input">
-                                            </div>
-                                            <div class="mb-3">
-                                                <img id="thumbnail" class="img-thumbnail" alt="200x200" width="200" src="<?=base_url()?>assets/images/nopreview.jpg" data-holder-rendered="true">
-                                            </div>
-                                            <div class="mb-3">
-                                                <button class="btn btn-primary w-md">Submit</button>
+                                <form method="post" id="company_form" enctype="multipart/form-data" autocomplete="off">
+                                    <div class="row">
+                                        <div class="col-lg-4"></div>
+                                        <div class="col-lg-4">
+                                            <div>
+                                                <div class="mb-3">
+                                                    <label for="example-text-input" class="form-label">Company Name</label>
+                                                    <input required class="form-control" type="text" value="" id="example-text-input">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="example-email-input" class="form-label">Company Address</label>
+                                                    <textarea required class="form-control"></textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="example-url-input" class="form-label">Company Logo</label>
+                                                    <input required accept="image/*" id="imgInp" class="form-control" type="file" id="example-url-input">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <img id="thumbnail" class="img-thumbnail" alt="200x200" width="200" src="<?=base_url()?>assets/images/nopreview.jpg" data-holder-rendered="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <button type="submit" class="btn btn-primary w-md">Submit</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <!-- end cardaa -->

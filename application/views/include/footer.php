@@ -62,7 +62,12 @@
         table.buttons().container()
             .appendTo('#datatable-department_wrapper .col-md-6:eq(0)');
     });
-    
+    $(function(){
+        $("#company_form").submit(function(e){
+            e.preventDefault();
+        });
+    });
+        
 
 
     
