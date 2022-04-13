@@ -24,7 +24,9 @@ class Home extends CI_Controller {
     }
 	public function index()
 	{
-		echo "Main Home";
+		if ( $this->session->userdata('is_login')){
+			redirect('dashboard', 'refresh');
+		}
 	}
     public function dashboard(){
 		$this->load->template('dashboard/admin','',1);

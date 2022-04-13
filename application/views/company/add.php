@@ -30,22 +30,22 @@
                                 <h4 class="card-title">Company Details</h4>
                             </div>
                             <div class="card-body p-4">
-                                <form method="post" id="company_form" enctype="multipart/form-data" autocomplete="off">
+                                <form method="post" id="company_form" action="<?=base_url()?>company/process" enctype="multipart/form-data" autocomplete="off">
                                     <div class="row">
                                         <div class="col-lg-4"></div>
                                         <div class="col-lg-4">
                                             <div>
                                                 <div class="mb-3">
                                                     <label for="example-text-input" class="form-label">Company Name</label>
-                                                    <input required class="form-control" type="text" value="" id="example-text-input">
+                                                    <input required name="CompanyName" class="form-control" type="text" value="" id="example-text-input">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="example-email-input" class="form-label">Company Address</label>
-                                                    <textarea required class="form-control"></textarea>
+                                                    <textarea name="CompanyAddress" required class="form-control"></textarea>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="example-url-input" class="form-label">Company Logo</label>
-                                                    <input required accept="image/*" id="imgInp" class="form-control" type="file" id="example-url-input">
+                                                    <input name="CompanyLogo" required accept="image/*" id="imgInp" class="form-control" type="file" id="example-url-input">
                                                 </div>
                                                 <div class="mb-3">
                                                     <img id="thumbnail" class="img-thumbnail" alt="200x200" width="200" src="<?=base_url()?>assets/images/nopreview.jpg" data-holder-rendered="true">

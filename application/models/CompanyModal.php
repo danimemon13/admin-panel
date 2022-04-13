@@ -1,7 +1,10 @@
 <?php 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class CompanyModal extends CI_Model {
-    public function AddCompany(){}
+    public function AddCompany($data){
+        $this->db->insert('me_company',$data);
+        return true;
+    }
     public function EditCompany(){}
     public function DeleteCompany(){}
     public function ShowCompany(){

@@ -44,5 +44,7 @@
 </head>
 <!--All Vertical Pages-->
 <body>
+    <div id="loading"></div>
+
     <!-- Begin page -->
     <div id="layout-wrapper">
