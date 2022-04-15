@@ -95,4 +95,7 @@ class Home extends CI_Controller {
 		}
 		$this->db->query("SET foreign_key_checks = 1");
 	}
+	public function socket(){
+		$this->load->view('socket');
+	}
 }

@@ -26,7 +26,6 @@
 <!-- Plugins js-->
 <script src="<?=base_url()?>assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
 <script src="<?=base_url()?>assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
-
 <!-- dashboard init -->
 <script src="<?=base_url()?>assets/js/pages/dashboard.init.js"></script>
 
@@ -39,9 +38,18 @@
 <script src="<?=base_url()?>assets/js/app.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.js"></script>
+<script src="<?=base_url()?>assets/js/node_modules/socket.io/client-dist/socket.io.js"></script>
 
 <script>
+    
+    var socket = io('http://localhost:3000', { transports : ['websocket'] });
+   //var socket = io.connect( 'http://localhost:3000' );
+
+</script>
+<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.toast.js"></script>
+<script>
     $(document).ready(function() {
+        var user = '<?=$_SESSION["is_login"]?>';
         <?php if($this->uri->segment(1)=='company' && $this->uri->segment(2)=='add'){
         ?>
         
@@ -105,6 +113,30 @@
             });
     }
     $(function(){
+        socket.on( 'message', function( data ) {
+            $("#btn_bell").addClass("shaker");
+            setTimeout(function(){
+                $("#btn_bell").removeClass("shaker");
+            },1000);
+            $.toast({
+                heading: 'Information',
+                position: 'bottom-right',
+                text: data.message,
+                stack: false,
+                icon: 'info',
+                loader: true,        // Change it to false to disable loader
+                loaderBg: '#9EC600'  // To change the background
+            });
+            table.destroy();
+            table = $('#datatable-company').DataTable({
+                "ajax": "<?=base_url()?>company/response",
+                dom: 'Blfrtip'
+            });
+
+
+
+            });
+        var user = '<?=$_SESSION["is_login"]?>';
         $("#company_form").submit(function(e){
             e.preventDefault();
             //company_form
@@ -123,9 +155,12 @@
                     $(".modal-body").html(data);
                     $("#exampleModalToggleLabel").html("Company Details")
                     $("#firstmodal").modal('toggle');
+                    socket.emit( 'message', { userid: user, message: "New Company Added" } );
+                    
                 },
                 complete: function() {
                     spinner.hide();
+                    
                 },
                 cache: false,
                 contentType: false,

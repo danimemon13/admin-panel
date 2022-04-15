@@ -27,7 +27,7 @@
         <!-- dropzone css -->
     <link href="<?=base_url()?>assets/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
     <link href="<?=base_url()?>assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-    
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/jquery.toast.min.css">
   <style>
         @media screen and (min-width: 767px){
             .dt-buttons.btn-group.flex-wrap {

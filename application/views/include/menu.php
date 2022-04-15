@@ -131,7 +131,7 @@
             </div>
 
             <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item noti-icon position-relative" id="page-header-notifications-dropdown"
+                <button id="btn_bell" type="button" class="btn header-item noti-icon position-relative" id="page-header-notifications-dropdown"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i data-feather="bell" class="icon-lg"></i>
                     <span class="badge bg-danger rounded-pill">5</span>

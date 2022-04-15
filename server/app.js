@@ -1,14 +1,20 @@
-const http = require('http');
+var socket = require( 'socket.io' );
+var express = require( 'express' );
+var http = require( 'http' );
+const { Server } = require("socket.io");
+var app = express();
+var server = http.createServer( app );
 
-const hostname = '127.0.0.1';
-const port = 3000;
+const io = new Server(server);
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
+io.sockets.on( 'connection', function( client ) {
+    console.log( "New client !" );
+
+    client.on( 'message', function( data ) {
+        console.log( 'Message received ' + data.userid + ":" + data.message );
+
+        io.sockets.emit( 'message', { name: data.userid, message: data.message } );
+    });
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+server.listen( 3000 );
