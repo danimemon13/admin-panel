@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // colorpicker
-
+/*
 // classic color picker
 var classicPickr = Pickr.create({
     el: '.classic-colorpicker',
@@ -241,3 +241,4 @@ flatpickr('#datepicker-timepicker', {
 flatpickr('#datepicker-inline', {
   inline: true
 });
+*/

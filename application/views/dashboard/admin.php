@@ -1541,7 +1541,7 @@
         </div>
         <!-- End Page-content -->
 
-        <?php include 'layouts/footer.php'; ?>
+     
     </div>
     <!-- end main content-->
 

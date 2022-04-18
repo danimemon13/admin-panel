@@ -44,11 +44,12 @@ class Company extends CI_Controller {
 		$data1 = [];
 		$count=0;     
 		foreach($data["company"] as $r) {
+			$CompanyID = $r["CompanyID"];
 			$base= base_url().''.$r["CompanyLogo"];
 			$btn = '<button type="button" class="btn btn-soft-primary waves-effect waves-light">';
 			$btn .= '<i class="mdi mdi-pencil font-size-16 align-middle" style="line-height: 1;"></i>';
 			$btn .= '</button>';
-			$btn .= '<button onClick="delete_company()" type="button" class="btn btn-soft-danger waves-effect waves-light">';
+			$btn .= '<button onClick="delete_company(this.id)" id="'.$CompanyID.'" type="button" class="btn btn-soft-danger waves-effect waves-light">';
 			$btn .= '<i class="bx bx-block font-size-16 align-middle"></i>';
 			$btn .= '</button>';
 			$data1[] = array(
@@ -101,6 +102,12 @@ class Company extends CI_Controller {
 			else{
 				echo "Data Failed";
 			}
+		}
+	}
+	public function delete(){
+		$data["save"] = $this->companymodal->DeleteCompany($_POST["CompanyID"]);
+		if($data["save"]==1){
+			echo "Data Deleted Successfully";
 		}
 	}
 	

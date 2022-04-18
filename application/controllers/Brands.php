@@ -25,5 +25,8 @@ class Brands extends CI_Controller {
     public function dashboard(){
         echo "Dashboard";
     }
+	public function marketing_reference(){
+		$this->load->template('brands/marketing_reference','',1);
+	}
 	
 }

@@ -30,11 +30,18 @@ class Department extends CI_Controller {
 		$data1 = [];
 		$count=0;     
 		foreach($data["department"] as $r) {
+			$DeparmentID = $r["DeparmentID"];
+			$btn = '<button type="button" class="btn btn-soft-primary waves-effect waves-light">';
+			$btn .= '<i class="mdi mdi-pencil font-size-16 align-middle" style="line-height: 1;"></i>';
+			$btn .= '</button>';
+			$btn .= '<button onClick="delete_department(this.id)" id="'.$DeparmentID.'" type="button" class="btn btn-soft-danger waves-effect waves-light">';
+			$btn .= '<i class="bx bx-block font-size-16 align-middle"></i>';
+			$btn .= '</button>';
 			$data1[] = array(
 				++$count,
 				$r["DepartmentName"],
 				date("d-M-Y", strtotime($r["DeparmentCreated"])),
-				''
+				$btn
 			);
 		}
 		$result = array(
@@ -44,6 +51,25 @@ class Department extends CI_Controller {
 			"data" => $data1
 		);
 		echo json_encode($result);
+	}
+	public function add(){
+		$this->load->template('department/add','',1);
+	}
+	public function process(){
+		$data["save"] = $this->departmentmodal->AddDepartment($_POST);
+		if($data["save"]==1){
+			echo "Data Saved";
+		}
+		else{
+			echo "Data Failed";
+		}
+		
+	}
+	public function delete(){
+		$data["save"] = $this->departmentmodal->DeleteDepartment($_POST["DeparmentID"]);
+		if($data["save"]==1){
+			echo "Data Deleted Successfully";
+		}
 	}
 
 	

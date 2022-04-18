@@ -26,20 +26,23 @@
 <!-- Plugins js-->
 <script src="<?=base_url()?>assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
 <script src="<?=base_url()?>assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
+<?php if($this->uri->segment(1)=='dashboard'){?>
 <!-- dashboard init -->
 <script src="<?=base_url()?>assets/js/pages/dashboard.init.js"></script>
-
+<?php } ?>
 
 <!-- dropzone js -->
 <script src="<?=base_url()?>assets/libs/dropzone/min/dropzone.min.js"></script>
 
+<script src="<?=base_url()?>assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
 
-
+<!-- init js -->
+<script src="<?=base_url()?>assets/js/pages/form-advanced.init.js"></script>
 <script src="<?=base_url()?>assets/js/app.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.js"></script>
 <script src="<?=base_url()?>assets/js/node_modules/socket.io/client-dist/socket.io.js"></script>
-
+<!-- choices js -->
 <script>
     
     var socket = io('http://localhost:3000', { transports : ['websocket'] });
@@ -48,7 +51,66 @@
 </script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/jquery.toast.js"></script>
 <script>
+    function roledatatable(){
+        //datatable-role
+        //Buttons examples
+        table = $('#datatable-role').DataTable();
+        table.destroy();
+        var table = $('#datatable-role').DataTable({
+            "ajax": "<?=base_url()?>role/response",
+            dom: 'Blfrtip'
+        });
+
+        table.buttons().container()
+            .appendTo('#datatable-role_wrapper .col-md-6:eq(0)');
+    }
+    function companydatatable(){
+        //Buttons examples
+        table = $('#datatable-company').DataTable();
+        table.destroy();
+        var table = $('#datatable-company').DataTable({
+            "ajax": "<?=base_url()?>company/response",
+            dom: 'Blfrtip'
+        });
+
+        table.buttons().container()
+            .appendTo('#datatable-company_wrapper .col-md-6:eq(0)');
+    }
+    function departmentdatatable(){
+        table = $('#datatable-department').DataTable();
+        table.destroy();
+        var table = $('#datatable-department').DataTable({
+            "ajax": "<?=base_url()?>department/response",
+            dom: 'Blfrtip'
+        });
+
+        table.buttons().container()
+            .appendTo('#datatable-department_wrapper .col-md-6:eq(0)');
+    }
+    function teamdatatable(){
+        table = $('#datatable-team').DataTable();
+        table.destroy();
+        var table = $('#datatable-team').DataTable({
+            "ajax": "<?=base_url()?>team/response",
+            dom: 'Blfrtip'
+        });
+
+        table.buttons().container()
+            .appendTo('#datatable-team_wrapper .col-md-6:eq(0)');
+    }
+    function regiondatatable(){
+        table = $('#datatable-region').DataTable();
+        table.destroy();
+        var table = $('#datatable-region').DataTable({
+            "ajax": "<?=base_url()?>region/response",
+            dom: 'Blfrtip'
+        });
+
+        table.buttons().container()
+            .appendTo('#datatable-region_wrapper .col-md-6:eq(0)');
+    }
     $(document).ready(function() {
+        
         var user = '<?=$_SESSION["is_login"]?>';
         <?php if($this->uri->segment(1)=='company' && $this->uri->segment(2)=='add'){
         ?>
@@ -62,24 +124,16 @@
             }
             <?php
         }?>
-        //Buttons examples
-        var table = $('#datatable-company').DataTable({
-            "ajax": "<?=base_url()?>company/response",
-            dom: 'Blfrtip'
-        });
-
-        table.buttons().container()
-            .appendTo('#datatable-company_wrapper .col-md-6:eq(0)');
-
-            var table = $('#datatable-department').DataTable({
-            "ajax": "<?=base_url()?>department/response",
-            dom: 'Blfrtip'
-        });
-
-        table.buttons().container()
-            .appendTo('#datatable-department_wrapper .col-md-6:eq(0)');
+        regiondatatable();
+        teamdatatable();
+        roledatatable();
+        companydatatable();
+        departmentdatatable();
+           
     });
-    function delete_company(){
+    function delete_company(CompanyID){
+        var CompanyID = CompanyID;
+        var user = '<?=$_SESSION["is_login"]?>';
         bootbox.dialog({
             message: "Are you sure you want to Delete ?",
             title: "<i class='glyphicon glyphicon-trash'></i> Delete !",
@@ -97,12 +151,17 @@
             callback: function() {
             $.ajax({
             type: 'POST',
-            url: 'deleteRecords.php',
-            data: 'empid=1'
+            url: '<?=base_url()?>company/delete',
+            data: 'CompanyID='+CompanyID
             })
             .done(function(response){
-            bootbox.alert(response);
-            parent.fadeOut('slow');
+                bootbox.alert({
+                    message: response,
+                    callback: function () {
+                        companydatatable();
+                        socket.emit( 'DeleteCompany', { userid: user, message: "Delete The Company" } );
+                    }  
+                });
             })
             .fail(function(){
             bootbox.alert('Error....');
@@ -110,10 +169,91 @@
             }
             }
             }
-            });
+        });
+    }
+    function delete_department(DeparmentID){
+        var DeparmentID = DeparmentID;
+        var user = '<?=$_SESSION["is_login"]?>';
+        bootbox.dialog({
+            message: "Are you sure you want to Delete ?",
+            title: "<i class='glyphicon glyphicon-trash'></i> Delete !",
+            buttons: {
+            success: {
+            label: "No",
+            className: "btn-success",
+            callback: function() {
+            $('.bootbox').modal('hide');
+            }
+            },
+            danger: {
+            label: "Delete!",
+            className: "btn-danger",
+            callback: function() {
+            $.ajax({
+            type: 'POST',
+            url: '<?=base_url()?>department/delete',
+            data: 'DeparmentID='+DeparmentID
+            })
+            .done(function(response){
+                bootbox.alert({
+                    message: response,
+                    callback: function () {
+                        departmentdatatable();
+                        socket.emit( 'DeleteDeparment', { userid: user, message: "Delete The Deparment" } );
+                    }  
+                });
+            })
+            .fail(function(){
+            bootbox.alert('Error....');
+            })
+            }
+            }
+            }
+        });
+    }
+    function delete_role(RoleID){
+        var RoleID = RoleID;
+        var user = '<?=$_SESSION["is_login"]?>';
+        bootbox.dialog({
+            message: "Are you sure you want to Delete ?",
+            title: "<i class='glyphicon glyphicon-trash'></i> Delete !",
+            buttons: {
+            success: {
+            label: "No",
+            className: "btn-success",
+            callback: function() {
+            $('.bootbox').modal('hide');
+            }
+            },
+            danger: {
+            label: "Delete!",
+            className: "btn-danger",
+            callback: function() {
+            $.ajax({
+            type: 'POST',
+            url: '<?=base_url()?>role/delete',
+            data: 'RoleID='+RoleID
+            })
+            .done(function(response){
+                bootbox.alert({
+                    message: response,
+                    callback: function () {
+                        roledatatable();
+                        socket.emit( 'DeleteRole', { userid: user, message: "Delete The Role" } );
+                    }  
+                });
+            })
+            .fail(function(){
+            bootbox.alert('Error....');
+            })
+            }
+            }
+            }
+        });
     }
     $(function(){
-        socket.on( 'message', function( data ) {
+        
+        socket.on( 'addDepartment', function( data ) {
             $("#btn_bell").addClass("shaker");
             setTimeout(function(){
                 $("#btn_bell").removeClass("shaker");
@@ -127,15 +267,72 @@
                 loader: true,        // Change it to false to disable loader
                 loaderBg: '#9EC600'  // To change the background
             });
-            table.destroy();
-            table = $('#datatable-company').DataTable({
-                "ajax": "<?=base_url()?>company/response",
-                dom: 'Blfrtip'
+            departmentdatatable();
+        });
+        socket.on( 'addRole', function( data ) {
+            $("#btn_bell").addClass("shaker");
+            setTimeout(function(){
+                $("#btn_bell").removeClass("shaker");
+            },1000);
+            $.toast({
+                heading: 'Information',
+                position: 'bottom-right',
+                text: data.message,
+                stack: false,
+                icon: 'info',
+                loader: true,        // Change it to false to disable loader
+                loaderBg: '#9EC600'  // To change the background
             });
-
-
-
+            roledatatable();
+        });
+        socket.on( 'addCompany', function( data ) {
+            $("#btn_bell").addClass("shaker");
+            setTimeout(function(){
+                $("#btn_bell").removeClass("shaker");
+            },1000);
+            $.toast({
+                heading: 'Information',
+                position: 'bottom-right',
+                text: data.message,
+                stack: false,
+                icon: 'info',
+                loader: true,        // Change it to false to disable loader
+                loaderBg: '#9EC600'  // To change the background
             });
+            companydatatable();
+        });
+        socket.on( 'DeleteCompany', function( data ) {
+            $("#btn_bell").addClass("shaker");
+            setTimeout(function(){
+                $("#btn_bell").removeClass("shaker");
+            },1000);
+            $.toast({
+                heading: 'Error',
+                position: 'bottom-right',
+                text: data.message,
+                stack: false,
+                icon: 'error',
+                loader: true,        // Change it to false to disable loader
+                loaderBg: '#9EC600'  // To change the background
+            });
+            companydatatable();
+        });
+        socket.on( 'DeleteDeparment', function( data ) {
+            $("#btn_bell").addClass("shaker");
+            setTimeout(function(){
+                $("#btn_bell").removeClass("shaker");
+            },1000);
+            $.toast({
+                heading: 'Error',
+                position: 'bottom-right',
+                text: data.message,
+                stack: false,
+                icon: 'error',
+                loader: true,        // Change it to false to disable loader
+                loaderBg: '#9EC600'  // To change the background
+            });
+            departmentdatatable();
+        });
         var user = '<?=$_SESSION["is_login"]?>';
         $("#company_form").submit(function(e){
             e.preventDefault();
@@ -155,7 +352,7 @@
                     $(".modal-body").html(data);
                     $("#exampleModalToggleLabel").html("Company Details")
                     $("#firstmodal").modal('toggle');
-                    socket.emit( 'message', { userid: user, message: "New Company Added" } );
+                    socket.emit( 'addCompany', { userid: user, message: "New Company Added" } );
                     
                 },
                 complete: function() {
@@ -167,6 +364,66 @@
                 processData: false
             });
         });
+        $("#department_form").submit(function(e){
+            e.preventDefault();
+            //company_form
+            var spinner = $('#loading');
+            
+            var formData = new FormData(this);
+            $.ajax({
+                url: '<?=base_url()?>department/process',
+                type: 'POST',
+                data: formData,
+                beforeSend: function() {
+                    // setting a timeout
+                    spinner.show();
+                },
+                success: function (data) {
+                    $(".modal-body").html(data);
+                    $("#exampleModalToggleLabel").html("Department Details")
+                    $("#firstmodal").modal('toggle');
+                    socket.emit( 'addDepartment', { userid: user, message: "New Department Added" } );
+                    
+                },
+                complete: function() {
+                    spinner.hide();
+                    
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+        //
+        $("#role_form").submit(function(e){
+            e.preventDefault();
+            var spinner = $('#loading');
+            
+            var formData = new FormData(this);
+            $.ajax({
+                url: '<?=base_url()?>role/process',
+                type: 'POST',
+                data: formData,
+                beforeSend: function() {
+                    // setting a timeout
+                    spinner.show();
+                },
+                success: function (data) {
+                    $(".modal-body").html(data);
+                    $("#exampleModalToggleLabel").html("Role Details")
+                    $("#firstmodal").modal('toggle');
+                    socket.emit( 'addRole', { userid: user, message: "New Department Added" } );
+                    
+                },
+                complete: function() {
+                    spinner.hide();
+                    
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        })
     });
         
 

@@ -58,14 +58,14 @@ class MenuModal extends CI_Model {
                     $html .= '<li>';
                     $html .= '<a href="'.base_url().''.$menu['items'][$itemId]->MenuLink.'">';
                     $html .= '<i data-feather="'.$menu['items'][$itemId]->MenuIcon.'" class="'.$menu['items'][$itemId]->MenuIcon.'"></i>';
-                    $html .= '<span data-key="t-dashboard">'.$menu['items'][$itemId]->MenuName.'</span>';
+                    $html .= '<span data-key="t-dashboard'.$itemId.'">'.$menu['items'][$itemId]->MenuName.'</span>';
                     $html .= '</a>';
                     $html .= '</li>';
                 }
                 else{
                     $html .= '<li>';
                     $html .= '<a href="'.base_url().''.$menu['items'][$itemId]->MenuLink.'">';
-                    $html .= '<span data-key="t-calendar">'.$menu['items'][$itemId]->MenuName.'</span>';
+                    $html .= '<span data-key="t-calendar'.$itemId.'">'.$menu['items'][$itemId]->MenuName.'</span>';
                     $html .= '</a>';
                     $html .= '</li>';
                 }
@@ -74,7 +74,7 @@ class MenuModal extends CI_Model {
                     $html .= '<li>';
                     $html .= '<a href="javascript: void(0);" class="has-arrow">';
                     $html .= '<i data-feather="'.$menu['items'][$itemId]->MenuIcon.'" class="'.$menu['items'][$itemId]->MenuIcon.'"></i>';
-                    $html .= '<span data-key="t-apps">'.$menu['items'][$itemId]->MenuName.'</span>';
+                    $html .= '<span data-key="t-apps'.$itemId.'">'.$menu['items'][$itemId]->MenuName.'</span>';
                     $html .= '</a>';
                     $html .= '<ul class="sub-menu" aria-expanded="false">';
                     $html .= $this->build_main_menu($itemId, $menu);

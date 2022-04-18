@@ -6,7 +6,14 @@ class CompanyModal extends CI_Model {
         return true;
     }
     public function EditCompany(){}
-    public function DeleteCompany(){}
+    public function DeleteCompany($CompanyID){
+        $update_rows = array(
+			'CompanyStatus' => 0
+		);
+        $this->db->where('CompanyID', $CompanyID);
+        $result = $this->db->update('me_company', $update_rows);
+        return $result;
+    }
     public function ShowCompany(){
         $this->db->select('*');
         $this->db->from("me_company");
