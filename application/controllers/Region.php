@@ -20,7 +20,17 @@ class Region extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->template('region/index','',1);
+		
+		$role_id = 1;
+		
+		$condition = "me_menu_access.RoleID =" . "'" . $role_id . "' and me_menu.MenuLink='region' and me_menu_access.view_access =1";
+        $data["access"] = $this->menumodal->ShowMenuBySearch($condition);
+		if(!empty($data["access"])){
+			$this->load->template('region/index','',1);
+		}
+		else{
+			$this->load->template('error/permission',$data,1);
+		}
 	}
 	public function response(){
 		$draw = intval($this->input->get("draw"));

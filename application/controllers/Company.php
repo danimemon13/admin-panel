@@ -37,6 +37,12 @@ class Company extends CI_Controller {
 		
 	}
 	public function response(){
+		$role_id = 1;
+		$condition = "me_menu_access.RoleID =" . "'" . $role_id . "' and me_menu.MenuLink='company' and me_menu_access.edit_access =1";
+        $data["edit_access"] = $this->menumodal->ShowMenuBySearch($condition);
+		$condition = "me_menu_access.RoleID =" . "'" . $role_id . "' and me_menu.MenuLink='company' and me_menu_access.delete_access =1";
+        $data["delete_access"] = $this->menumodal->ShowMenuBySearch($condition);
+		
 		$draw = intval($this->input->get("draw"));
 		$start = intval($this->input->get("start"));
 		$length = intval($this->input->get("length"));
@@ -46,12 +52,17 @@ class Company extends CI_Controller {
 		foreach($data["company"] as $r) {
 			$CompanyID = $r["CompanyID"];
 			$base= base_url().''.$r["CompanyLogo"];
-			$btn = '<button type="button" class="btn btn-soft-primary waves-effect waves-light">';
+			$btn = '';
+			if(!empty($data["edit_access"])){
+			$btn .= '<button type="button" class="btn btn-soft-primary waves-effect waves-light">';
 			$btn .= '<i class="mdi mdi-pencil font-size-16 align-middle" style="line-height: 1;"></i>';
 			$btn .= '</button>';
+			}
+			if(!empty($data["delete_access"])){
 			$btn .= '<button onClick="delete_company(this.id)" id="'.$CompanyID.'" type="button" class="btn btn-soft-danger waves-effect waves-light">';
 			$btn .= '<i class="bx bx-block font-size-16 align-middle"></i>';
 			$btn .= '</button>';
+			}
 			$data1[] = array(
 				++$count,
 				$r["CompanyName"],

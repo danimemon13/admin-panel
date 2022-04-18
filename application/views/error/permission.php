@@ -14,7 +14,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10 col-xl-8">
                 <div>
-                    <img src="assets/images/error-img.png" alt="" class="img-fluid">
+                    <img src="<?=base_url()?>assets/images/error-img.png" alt="" class="img-fluid">
                 </div>
             </div>
             <!-- end row -->

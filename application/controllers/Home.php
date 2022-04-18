@@ -29,7 +29,17 @@ class Home extends CI_Controller {
 		}
 	}
     public function dashboard(){
-		$this->load->template('dashboard/admin','',1);
+		
+		$role_id = 1;
+		
+		$condition = "me_menu_access.RoleID =" . "'" . $role_id . "' and me_menu.MenuLink='dashboard' and me_menu_access.view_access =1";
+        $data["access"] = $this->menumodal->ShowMenuBySearch($condition);
+		if(!empty($data["access"])){
+			$this->load->template('dashboard/admin','',1);
+		}
+		else{
+			$this->load->template('error/permission',$data,1);
+		}
     }
 	public function backup(){
 		$this->load->dbutil();
