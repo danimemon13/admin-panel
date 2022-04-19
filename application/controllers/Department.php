@@ -47,11 +47,12 @@ class Department extends CI_Controller {
 		   
 		foreach($data["department"] as $r) {
 			$DeparmentID = $r["DeparmentID"];
+			$DeparmentIDencode = urlencode(base64_encode($DeparmentID));
 			$btn = '';
 			if(!empty($data["edit_access"])){
-			$btn .= '<button type="button" class="btn btn-soft-primary waves-effect waves-light">';
-			$btn .= '<i class="mdi mdi-pencil font-size-16 align-middle" style="line-height: 1;"></i>';
-			$btn .= '</button>';
+				$btn .= '<a href="'.base_url().'department/edit/'.$DeparmentIDencode.'" class="btn btn-soft-primary waves-effect waves-light">';
+				$btn .= '<i class="mdi mdi-pencil font-size-16 align-middle" style="line-height: 1;"></i>';
+				$btn .= '</a>';
 			}
 			if(!empty($data["delete_access"])){
 			$btn .= '<button onClick="delete_department(this.id)" id="'.$DeparmentID.'" type="button" class="btn btn-soft-danger waves-effect waves-light">';
@@ -100,6 +101,21 @@ class Department extends CI_Controller {
 		$data["save"] = $this->departmentmodal->DeleteDepartment($_POST["DeparmentID"]);
 		if($data["save"]==1){
 			echo "Data Deleted Successfully";
+		}
+	}
+	public function edit($DeparmentID=null){
+		//echo $CompanyID;
+		$DeparmentID = base64_decode(urldecode($DeparmentID));
+		$role_id = 1;
+		$condition = "me_menu_access.RoleID =" . "'" . $role_id . "' and me_menu.MenuLink='department' and me_menu_access.edit_access =1";
+        $data["access"] = $this->menumodal->ShowMenuBySearch($condition);
+		$array = array("DeparmentID"=>$DeparmentID);
+		$data["department"] = $this->departmentmodal->ShowDepartmentBySearch($array);
+		if(!empty($data["access"])){
+			$this->load->template('department/edit',$data,1);
+		}
+		else{
+			$this->load->template('error/permission',$data,1);
 		}
 	}
 

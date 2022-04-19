@@ -53,10 +53,11 @@ class Company extends CI_Controller {
 			$CompanyID = $r["CompanyID"];
 			$base= base_url().''.$r["CompanyLogo"];
 			$btn = '';
+			$CompanyIDencode = urlencode(base64_encode($CompanyID));
 			if(!empty($data["edit_access"])){
-			$btn .= '<button type="button" class="btn btn-soft-primary waves-effect waves-light">';
+			$btn .= '<a href="'.base_url().'company/edit/'.$CompanyIDencode.'" class="btn btn-soft-primary waves-effect waves-light">';
 			$btn .= '<i class="mdi mdi-pencil font-size-16 align-middle" style="line-height: 1;"></i>';
-			$btn .= '</button>';
+			$btn .= '</a>';
 			}
 			if(!empty($data["delete_access"])){
 			$btn .= '<button onClick="delete_company(this.id)" id="'.$CompanyID.'" type="button" class="btn btn-soft-danger waves-effect waves-light">';
@@ -119,6 +120,21 @@ class Company extends CI_Controller {
 		$data["save"] = $this->companymodal->DeleteCompany($_POST["CompanyID"]);
 		if($data["save"]==1){
 			echo "Data Deleted Successfully";
+		}
+	}
+	public function edit($CompanyID=null){
+		//echo $CompanyID;
+		$CompanyID = base64_decode(urldecode($CompanyID));
+		$role_id = 1;
+		$condition = "me_menu_access.RoleID =" . "'" . $role_id . "' and me_menu.MenuLink='company' and me_menu_access.edit_access =1";
+        $data["access"] = $this->menumodal->ShowMenuBySearch($condition);
+		$array = array("CompanyID"=>$CompanyID);
+		$data["company"] = $this->companymodal->ShowCompanyBySearch($array);
+		if(!empty($data["access"])){
+			$this->load->template('company/edit',$data,1);
+		}
+		else{
+			$this->load->template('error/permission',$data,1);
 		}
 	}
 	

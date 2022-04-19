@@ -21,6 +21,13 @@ class DepartmentModal extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
+    public function ShowDepartmentBySearch($array){
+        $this->db->select('*');
+        $this->db->from("me_department");
+        $this->db->where($array);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
 
 ?>
