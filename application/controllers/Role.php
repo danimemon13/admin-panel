@@ -46,10 +46,12 @@ class Role extends CI_Controller {
         $data["delete_access"] = $this->menumodal->ShowMenuBySearch($condition);
 		foreach($data["role"] as $r) {
 			$RoleID = $r["RoleID"];
+			$btn = '';
+			$RoleIDencode = urlencode(base64_encode($RoleID));
 			if(!empty($data["edit_access"])){
-			$btn = '<button type="button" class="btn btn-soft-primary waves-effect waves-light">';
-			$btn .= '<i class="mdi mdi-pencil font-size-16 align-middle" style="line-height: 1;"></i>';
-			$btn .= '</button>';
+				$btn .= '<a href="'.base_url().'role/edit/'.$RoleIDencode.'" class="btn btn-soft-primary waves-effect waves-light">';
+				$btn .= '<i class="mdi mdi-pencil font-size-16 align-middle" style="line-height: 1;"></i>';
+				$btn .= '</a>';
 			}
 			if(!empty($data["delete_access"])){
 			$btn .= '<button onClick="delete_role(this.id)" id="'.$RoleID.'" type="button" class="btn btn-soft-danger waves-effect waves-light">';
@@ -103,5 +105,39 @@ class Role extends CI_Controller {
     public function dashboard(){
         echo "Dashboard";
     }
+	public function edit($RoleID){
+		$RoleID = base64_decode(urldecode($RoleID));
+		$role_id = 1;
+		$condition = "me_menu_access.RoleID =" . "'" . $role_id . "' and me_menu.MenuLink='role' and me_menu_access.edit_access =1";
+        $data["access"] = $this->menumodal->ShowMenuBySearch($condition);
+		$array = array("RoleID"=>$RoleID);
+		$data["role"] = $this->rolemodal->ShowRoleBySearch($array);
+		$data["department"] = $this->departmentmodal->ShowDepartment();
+		if(!empty($data["access"])){
+			$this->load->template('role/edit',$data,1);
+		}
+		else{
+			$this->load->template('error/permission',$data,1);
+		}
+	}
+	public function edit_process(){
+		$RoleStatus = 0;
+		$RoleID = $this->input->post("RoleID");
+		if(isset($_POST["RoleStatus"])){
+			$RoleStatus = 1;
+		}
+		$array = array(
+			"RoleName"=>$this->input->post("RoleName"),
+			"DeparmentID"=>$this->input->post("DeparmentID"),
+			"RoleStatus"=>$RoleStatus,
+		);
+		$data["update"] = $this->rolemodal->EditRole($array,$RoleID);
+		if($data["update"]==1){
+			echo "Data Updated";
+		}
+		else{
+			echo "Data Failed";
+		}
+	}
 	
 }

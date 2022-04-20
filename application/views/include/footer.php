@@ -334,6 +334,7 @@
             departmentdatatable();
         });
         var user = '<?=$_SESSION["is_login"]?>';
+        /*Company Functions */
         $("#company_form").submit(function(e){
             e.preventDefault();
             //company_form
@@ -364,6 +365,39 @@
                 processData: false
             });
         });
+        $("#company_edit_form").submit(function(e){
+            e.preventDefault();
+            //company_form
+            var spinner = $('#loading');
+            
+            var formData = new FormData(this);
+            $.ajax({
+                url: '<?=base_url()?>company/edit_process',
+                type: 'POST',
+                data: formData,
+                beforeSend: function() {
+                    // setting a timeout
+                    spinner.show();
+                },
+                success: function (data) {
+                    $(".modal-body").html(data);
+                    $("#exampleModalToggleLabel").html("Company Details")
+                    $("#firstmodal").modal('toggle');
+                    socket.emit( 'addCompany', { userid: user, message: "New Company Added" } );
+                    
+                },
+                complete: function() {
+                    spinner.hide();
+                    
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+        /*Company Functions End*/
+        
+        /* Department Functions */
         $("#department_form").submit(function(e){
             e.preventDefault();
             //company_form
@@ -394,7 +428,40 @@
                 processData: false
             });
         });
+        $("#department_edit_form").submit(function(e){
+            e.preventDefault();
+            //company_form
+            var spinner = $('#loading');
+            
+            var formData = new FormData(this);
+            $.ajax({
+                url: '<?=base_url()?>department/edit_process',
+                type: 'POST',
+                data: formData,
+                beforeSend: function() {
+                    // setting a timeout
+                    spinner.show();
+                },
+                success: function (data) {
+                    $(".modal-body").html(data);
+                    $("#exampleModalToggleLabel").html("Department Details")
+                    $("#firstmodal").modal('toggle');
+                    socket.emit( 'addDepartment', { userid: user, message: "New Department Added" } );
+                    
+                },
+                complete: function() {
+                    spinner.hide();
+                    
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+        /* Department Functions End*/
         //
+        //
+        /* Department Functions */
         $("#role_form").submit(function(e){
             e.preventDefault();
             var spinner = $('#loading');
@@ -423,13 +490,46 @@
                 contentType: false,
                 processData: false
             });
-        })
+        });
+        $("#role_edit_form").submit(function(e){
+            e.preventDefault();
+            var spinner = $('#loading');
+            
+            var formData = new FormData(this);
+            $.ajax({
+                url: '<?=base_url()?>role/edit_process',
+                type: 'POST',
+                data: formData,
+                beforeSend: function() {
+                    // setting a timeout
+                    spinner.show();
+                },
+                success: function (data) {
+                    $(".modal-body").html(data);
+                    $("#exampleModalToggleLabel").html("Role Details")
+                    $("#firstmodal").modal('toggle');
+                    socket.emit( 'addRole', { userid: user, message: "New Department Added" } );
+                    
+                },
+                complete: function() {
+                    spinner.hide();
+                    
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+        /* Department Functions End*/
     });
-        
+function shortcut(value){
+    var url = '<?=base_url()?>'+value.toLowerCase();
+    window.location.href = url;
+}        
 
 
     
-    
+
 
 </script>
 <div class="modal fade" id="firstmodal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">

@@ -125,6 +125,7 @@ class MY_Loader extends CI_Loader {
         $this->ci =& get_instance();
         $this->ci->load->model('MenuModal');
         $data['menu'] = $this->ci->MenuModal->main_menu(1);
+        $data['search'] = $this->ci->MenuModal->shortcut_menu(1);
         $this->view('include/header', $language, $return ,$language);
         $this->view('include/menu', $data);
         $this->view($template_name, $vars, $return,$language);

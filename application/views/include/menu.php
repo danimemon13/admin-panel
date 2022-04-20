@@ -29,7 +29,10 @@
             <!-- App Search-->
             <form class="app-search d-none d-lg-block">
                 <div class="position-relative">
-                    <input type="text" class="form-control" placeholder="<?php echo $Search; ?>">
+                    <input onChange="shortcut(this.value)" list="datalistOptions" type="text" id="" class="form-control" placeholder="<?php echo $Search; ?>">
+                    <datalist id="datalistOptions">
+                        <?=$search?>
+                    </datalist>
                     <button class="btn btn-primary" type="button"><i class="bx bx-search-alt align-middle"></i></button>
                 </div>
             </form>

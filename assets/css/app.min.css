@@ -42,3 +42,6 @@
 .shaker {
   animation: skew-x-shakeng 0.15s infinite;
 }
+.hidden{
+  display: none;
+}

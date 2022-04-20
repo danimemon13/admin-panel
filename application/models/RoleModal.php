@@ -7,7 +7,11 @@ class RoleModal extends CI_Model {
         $this->RoleMenuadd($insert_id);
         return true;
     }
-    public function EditRole(){}
+    public function EditRole($data,$EditRole){
+        $this->db->where('RoleID', $EditRole);
+        $result = $this->db->update('me_role', $data);
+        return true;
+    }
     public function DeleteRole($RoleID){
         $update_rows = array(
 			'RoleStatus' => 0
@@ -44,6 +48,14 @@ class RoleModal extends CI_Model {
         return true;
         
     }
+    public function ShowRoleBySearch($array){
+        $this->db->select('*');
+        $this->db->from("me_role");
+        $this->db->where($array);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
 }
 
 ?>

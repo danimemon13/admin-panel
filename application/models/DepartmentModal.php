@@ -5,7 +5,11 @@ class DepartmentModal extends CI_Model {
         $this->db->insert('me_department',$data);
         return true;
     }
-    public function EditDepartment(){}
+    public function EditDepartment($data,$EditDepartment){
+        $this->db->where('DeparmentID', $EditDepartment);
+        $result = $this->db->update('me_department', $data);
+        return true;
+    }
     public function DeleteDepartment($DeparmentID){
         $update_rows = array(
 			'DeparmentStatus' => 0

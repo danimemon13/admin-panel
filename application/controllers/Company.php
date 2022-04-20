@@ -137,5 +137,50 @@ class Company extends CI_Controller {
 			$this->load->template('error/permission',$data,1);
 		}
 	}
+	public function edit_process(){
+		$name =  $_FILES["CompanyLogo"]["name"];
+		$CompanyStatus = 0;
+		$CompanyID = $this->input->post("CompanyID");
+		if(isset($_POST["CompanyStatus"])){
+			$CompanyStatus = 1;
+		}
+		if($name==''){
+				$array = array(
+					"CompanyName"=>$this->input->post("CompanyName"),
+					"CompanyAddress"=>$this->input->post("CompanyAddress"),
+					"CompanyStatus"=>$CompanyStatus,
+				);
+				$data["update"] = $this->companymodal->EditCompany($array,$CompanyID);
+				if($data["update"]==1){
+					echo "Data Updated";
+				}
+				else{
+					echo "Data Failed";
+				}
+			
+		}
+		else{
+			$newname = str_replace(" ","-",$this->input->post("CompanyName"));
+			$path = "assets/images/company";
+			$fileExt = pathinfo($_FILES["CompanyLogo"]["name"], PATHINFO_EXTENSION);
+			$image_new=fileuploadCI('CompanyLogo',$path,$newname);
+			if($image_new==1){
+				$array = array(
+					"CompanyName"=>$this->input->post("CompanyName"),
+					"CompanyLogo"=>$path.'/'.$newname.'.'.$fileExt,
+					"CompanyAddress"=>$this->input->post("CompanyAddress"),
+					"CompanyStatus"=>$CompanyStatus,
+				);
+				$data["update"] = $this->companymodal->EditCompany($array,$CompanyID);
+				if($data["update"]==1){
+					echo "Data Updated";
+				}
+				else{
+					echo "Data Failed";
+				}
+			}
+		}
+		
+	}
 	
 }

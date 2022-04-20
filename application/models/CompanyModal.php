@@ -5,7 +5,11 @@ class CompanyModal extends CI_Model {
         $this->db->insert('me_company',$data);
         return true;
     }
-    public function EditCompany(){}
+    public function EditCompany($data,$EditCompany){
+        $this->db->where('CompanyID', $EditCompany);
+        $result = $this->db->update('me_company', $data);
+        return true;
+    }
     public function DeleteCompany($CompanyID){
         $update_rows = array(
 			'CompanyStatus' => 0

@@ -118,6 +118,24 @@ class Department extends CI_Controller {
 			$this->load->template('error/permission',$data,1);
 		}
 	}
+	public function edit_process(){
+		$DeparmentStatus = 0;
+		$DeparmentID = $this->input->post("DeparmentID");
+		if(isset($_POST["DeparmentStatus"])){
+			$DeparmentStatus = 1;
+		}
+		$array = array(
+			"DepartmentName"=>$this->input->post("DepartmentName"),
+			"DeparmentStatus"=>$DeparmentStatus,
+		);
+		$data["update"] = $this->departmentmodal->EditDepartment($array,$DeparmentID);
+		if($data["update"]==1){
+			echo "Data Updated";
+		}
+		else{
+			echo "Data Failed";
+		}
+	}
 
 	
 }

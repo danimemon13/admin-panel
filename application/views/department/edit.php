@@ -30,15 +30,18 @@
                                 <h4 class="card-title">Department Details</h4>
                             </div>
                             <div class="card-body p-4">
-                                <form method="post" id="department_form" action="<?=base_url()?>department/process" enctype="multipart/form-data" autocomplete="off">
+                                <form method="post" id="department_edit_form" action="<?=base_url()?>department/process" enctype="multipart/form-data" autocomplete="off">
                                     <div class="row">
                                         <div class="col-lg-4"></div>
                                         <div class="col-lg-4">
                                             <div>
                                                 <div class="mb-3">
                                                     <label for="example-text-input" class="form-label">Department Name</label>
+                                                    <input required name="DeparmentID" class="form-control hidden" type="text" value="<?=$department[0]['DeparmentID'];?>" id="example-text-input">
                                                     <input required name="DepartmentName" class="form-control" type="text" value="<?=$department[0]['DepartmentName'];?>" id="example-text-input">
                                                 </div>
+                                                <input name="DeparmentStatus" type="checkbox" id="switch1" switch="none" checked />
+                                                <label for="switch1" data-on-label="Active" data-off-label="In-Active"></label>
                                                 <div class="mb-3">
                                                     <button type="submit" class="btn btn-primary w-md">Submit</button>
                                                 </div>
