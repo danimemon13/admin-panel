@@ -251,6 +251,17 @@
             }
         });
     }
+    function get_role(value){
+        var RoleID = value;
+        $.ajax({
+            type:'post',
+            url:'<?=base_url()?>permission/permission_response',
+            data:{'RoleID':RoleID},
+            success:function(response){
+                $("#response").html(response)
+            }
+        });
+    }
     $(function(){
         
         socket.on( 'addDepartment', function( data ) {
@@ -461,7 +472,7 @@
         /* Department Functions End*/
         //
         //
-        /* Department Functions */
+        /* Role Functions */
         $("#role_form").submit(function(e){
             e.preventDefault();
             var spinner = $('#loading');
@@ -520,7 +531,66 @@
                 processData: false
             });
         });
-        /* Department Functions End*/
+        /* Role Functions End*/
+        //
+        $("#team_form").submit(function(e){
+            e.preventDefault();
+            var spinner = $('#loading');
+            
+            var formData = new FormData(this);
+            $.ajax({
+                url: '<?=base_url()?>team/process',
+                type: 'POST',
+                data: formData,
+                beforeSend: function() {
+                    // setting a timeout
+                    spinner.show();
+                },
+                success: function (data) {
+                    $(".modal-body").html(data);
+                    $("#exampleModalToggleLabel").html("Team Details")
+                    $("#firstmodal").modal('toggle');
+                    socket.emit( 'addRole', { userid: user, message: "New Department Added" } );
+                    
+                },
+                complete: function() {
+                    spinner.hide();
+                    
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+        $("#team_edit_form").submit(function(e){
+            e.preventDefault();
+            var spinner = $('#loading');
+            
+            var formData = new FormData(this);
+            $.ajax({
+                url: '<?=base_url()?>team/edit_process',
+                type: 'POST',
+                data: formData,
+                beforeSend: function() {
+                    // setting a timeout
+                    spinner.show();
+                },
+                success: function (data) {
+                    $(".modal-body").html(data);
+                    $("#exampleModalToggleLabel").html("Team Details")
+                    $("#firstmodal").modal('toggle');
+                    socket.emit( 'addRole', { userid: user, message: "New Department Added" } );
+                    
+                },
+                complete: function() {
+                    spinner.hide();
+                    
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
     });
 function shortcut(value){
     var url = '<?=base_url()?>'+value.toLowerCase();

@@ -5,6 +5,14 @@ class MenuModal extends CI_Model {
     public function EditMenu(){}
     public function DeleteMenu(){}
     public function ShowMenu(){}
+    public function ShowPermissions($array){
+        $this->db->select('me_menu.MenuID, me_menu.MenuName,me_menu.add_access as available_add_access,me_menu.edit_access as available_edit_access,me_menu.delete_access as available_delete_access,me_menu.view_access as available_view_access');
+		$this->db->from('me_menu');
+		$this->db->join('me_menu_access','me_menu_access.MenuID=me_menu.MenuID'); 
+		$this->db->where($array);
+		$query = $this->db->get();
+        return $query->result_array();
+    }
     public function ShowMenuBySearch($array){
         $this->db->select('me_menu.MenuID, me_menu.MenuName, me_menu.MenuLink,me_menu.MenuIcon,me_menu.MenuChild,me_menu.MenuParent');
 		$this->db->from('me_menu');

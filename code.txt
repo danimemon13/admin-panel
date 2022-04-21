@@ -94,3 +94,24 @@ function restore_file(){
         })*/
     });
 https://makitweb.com/upload-all-files-on-button-click-dropzone-and-php/
+https://www.bezkoder.com/angular-node-express-mysql/
+https://laratutorials.com/angular-12-node-js-express-mysql-crud-example/
+https://morioh.com/p/33d0377536a6
+https://www.bezkoder.com/react-node-express-mysql/
+https://mfikri.com/en/blog/node-express-react-mysql
+https://morioh.com/p/9e367d99e7e4
+
+
+<div class="mb-3">
+                                            <button type="submit" class="btn btn-primary w-md">Submit</button>
+                                        </div>
+<div class="table-responsive">
+available_add_access
+available_edit_access
+available_delete_access
+available_view_access
+
+<div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" id="formrow-customCheck">
+                                                        <label class="form-check-label" for="formrow-customCheck">Check me out</label>
+                                                    </div>
