@@ -58,3 +58,4 @@ $route['login'] = 'Login/login';
 $route['back-up'] = 'home/backup';
 $route['restore'] = 'home/restore';
 $route['marketing-reference'] = 'brands/marketing_reference';
+$route['session/(:any)/(:any)'] = 'home/session/$1/$2';

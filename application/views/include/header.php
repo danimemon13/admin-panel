@@ -45,7 +45,9 @@
     
 </head>
 <!--All Vertical Pages-->
-<body>
+
+
+<body <?php echo ($_SESSION["menu_align"] == 'horizontal') ? 'data-topbar="light" data-layout="horizontal"': '';?>>
     <div id="loading"></div>
 
     <!-- Begin page -->

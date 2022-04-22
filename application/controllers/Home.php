@@ -31,7 +31,7 @@ class Home extends CI_Controller {
     public function dashboard(){
 		
 		$role_id = 1;
-		
+		//$this->session->userdata('menu_align');
 		$condition = "me_menu_access.RoleID =" . "'" . $role_id . "' and me_menu.MenuLink='dashboard' and me_menu_access.view_access =1";
         $data["access"] = $this->menumodal->ShowMenuBySearch($condition);
 		if(!empty($data["access"])){
@@ -110,5 +110,9 @@ class Home extends CI_Controller {
 	}
 	public function notfound(){
 		$this->load->view('error/404');
+	}
+	public function session($sessionname,$sessionvalue){
+		$this->session->set_userdata($sessionname,$sessionvalue);
+		redirect('dashboard', 'refresh');
 	}
 }

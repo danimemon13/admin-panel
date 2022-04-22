@@ -330,8 +330,31 @@ File: Main Js File
 
         // on layou change
         $("input[name='layout']").on('change', function () {
-            window.location.href = ($(this).val() == "vertical") ? "index.php": "layouts-horizontal.php";
+           var layout_align = $(this).val();
+           sessionStorage.setItem('layout_align', layout_align);
+           window.location.href= 'session/menu_align/'+layout_align;
+            // window.location.href = ($(this).val() == "vertical") ? "index.php": "layouts-horizontal.php";
         });
+        $("input[name='layout-position']").on('change', function () {
+            var layout_position = $(this).val();
+            sessionStorage.setItem('layout_position', layout_position);
+             // window.location.href = ($(this).val() == "vertical") ? "index.php": "layouts-horizontal.php";
+         });
+        $("input[name='layout-width']").on('change', function () {
+            var layout_width = $(this).val();
+            sessionStorage.setItem('layout_width', layout_width);
+             // window.location.href = ($(this).val() == "vertical") ? "index.php": "layouts-horizontal.php";
+         });
+         $("input[name='sidebar-size']").on('change', function () {
+            var sidebar_size = $(this).val();
+            sessionStorage.setItem('sidebar_size', sidebar_size);
+             // window.location.href = ($(this).val() == "vertical") ? "index.php": "layouts-horizontal.php";
+         });
+         $("input[name='sidebar-color']").on('change', function () {
+            var sidebar_color = $(this).val();
+            sessionStorage.setItem('sidebar_color', sidebar_color);
+             // window.location.href = ($(this).val() == "vertical") ? "index.php": "layouts-horizontal.php";
+         });
         
         // on layout mode change
         $("input[name='layout-mode']").on('change', function () {
@@ -388,6 +411,59 @@ File: Main Js File
         $(function(){
             let data = sessionStorage.getItem('layout');
             var body = document.getElementsByTagName("body")[0];
+            var data1 = sessionStorage.getItem('layout_width');
+            var data3 = sessionStorage.getItem('layout_position');
+            var data4 = sessionStorage.getItem('sidebar_size');
+            var data5 = sessionStorage.getItem('sidebar_color');
+            alert(data5);
+            //data-sidebar="dark"
+            //data-sidebar-size="sm"
+            document.body.setAttribute('data-sidebar', 'brand');
+            if(data5=='light'){
+                
+                document.body.setAttribute('data-sidebar', 'light');
+                $("#sidebar-color-light").prop('checked', true);
+            }
+            if(data5=='dark'){
+                
+                document.body.setAttribute('data-sidebar', 'dark');
+                $("#sidebar-color-dark").prop('checked', true);
+            }
+            else{
+                
+                document.body.setAttribute('data-sidebar', 'brand');
+                $("#sidebar-color-brand").prop('checked', true);
+            }
+
+            if(data4=='default'){
+                $("#sidebar-size-default").prop('checked', true);
+                document.body.setAttribute('data-sidebar-size', 'lg');
+            }
+            else if(data4=='compact'){
+                $("#sidebar-size-compact").prop('checked', true);
+                document.body.setAttribute('data-sidebar-size', 'md');
+            }
+            else{
+                $("#sidebar-size-small").prop('checked', true);
+                document.body.setAttribute('data-sidebar-size', 'sm');
+            }
+
+            if(data3=='fixed'){
+                $("#layout-position-fixed").prop('checked', true);
+                document.body.setAttribute('data-layout-scrollable', 'false');
+            }
+            else{
+                document.body.setAttribute('data-layout-scrollable', 'true');
+                $("#layout-position-scrollable").prop('checked', true);
+            }
+            if(data1 == "fuild") {
+                $("#layout-width-fuild").prop('checked', true);
+                document.body.setAttribute('data-layout-size', 'fuild');
+            }
+            else{
+                $("#layout-width-boxed").prop('checked', true);
+                document.body.setAttribute('data-layout-size', 'boxed');
+            }
             if(data == "light") {
                 $("#layout-mode-light").prop('checked', true);
                 document.body.setAttribute('data-layout-mode', 'light');

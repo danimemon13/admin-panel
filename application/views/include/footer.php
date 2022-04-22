@@ -263,7 +263,6 @@
         });
     }
     $(function(){
-        
         socket.on( 'addDepartment', function( data ) {
             $("#btn_bell").addClass("shaker");
             setTimeout(function(){
