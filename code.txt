@@ -115,3 +115,6 @@ available_view_access
                                                         <input type="checkbox" class="form-check-input" id="formrow-customCheck">
                                                         <label class="form-check-label" for="formrow-customCheck">Check me out</label>
                                                     </div>
+
+
+https://www.educative.io/edpresso/how-to-change-a-git-commit-message-after-a-push
