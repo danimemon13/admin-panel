@@ -21,6 +21,11 @@ class Home extends CI_Controller {
 	function __construct() {
         parent::__construct();
 		$this->session->set_userdata("is_login","1");
+		if(isset($_SESSION["menu_align"])){}
+		else{
+			$this->session->set_userdata("menu_align","non-horizontal");
+		}
+		//
     }
 	public function index()
 	{

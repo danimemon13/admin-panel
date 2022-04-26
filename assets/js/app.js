@@ -415,16 +415,15 @@ File: Main Js File
             var data3 = sessionStorage.getItem('layout_position');
             var data4 = sessionStorage.getItem('sidebar_size');
             var data5 = sessionStorage.getItem('sidebar_color');
-            alert(data5);
+            //alert(data5);
             //data-sidebar="dark"
             //data-sidebar-size="sm"
-            document.body.setAttribute('data-sidebar', 'brand');
             if(data5=='light'){
-                
                 document.body.setAttribute('data-sidebar', 'light');
+                
                 $("#sidebar-color-light").prop('checked', true);
             }
-            if(data5=='dark'){
+            else if(data5=='dark'){
                 
                 document.body.setAttribute('data-sidebar', 'dark');
                 $("#sidebar-color-dark").prop('checked', true);
@@ -434,7 +433,7 @@ File: Main Js File
                 document.body.setAttribute('data-sidebar', 'brand');
                 $("#sidebar-color-brand").prop('checked', true);
             }
-
+            
             if(data4=='default'){
                 $("#sidebar-size-default").prop('checked', true);
                 document.body.setAttribute('data-sidebar-size', 'lg');
@@ -468,16 +467,16 @@ File: Main Js File
                 $("#layout-mode-light").prop('checked', true);
                 document.body.setAttribute('data-layout-mode', 'light');
                 document.body.setAttribute('data-topbar', 'light');
-                document.body.setAttribute('data-sidebar', 'light');
-                (body.hasAttribute("data-layout") && body.getAttribute("data-layout") == "horizontal") ? '' : document.body.setAttribute('data-sidebar', 'light');
+                //document.body.setAttribute('data-sidebar', 'light');
+                //(body.hasAttribute("data-layout") && body.getAttribute("data-layout") == "horizontal") ? '' : document.body.setAttribute('data-sidebar', 'light');
                 updateRadio('topbar-color-light')
                 updateRadio('sidebar-color-light')
             } else {
                 $("#layout-mode-dark").prop('checked', true);
                 document.body.setAttribute('data-layout-mode', 'dark');
                 document.body.setAttribute('data-topbar', 'dark');
-                document.body.setAttribute('data-sidebar', 'dark');
-                (body.hasAttribute("data-layout") && body.getAttribute("data-layout") == "horizontal") ? '' : document.body.setAttribute('data-sidebar', 'dark');
+                //document.body.setAttribute('data-sidebar', 'dark');
+                //(body.hasAttribute("data-layout") && body.getAttribute("data-layout") == "horizontal") ? '' : document.body.setAttribute('data-sidebar', 'dark');
                 updateRadio('topbar-color-dark')
                 updateRadio('sidebar-color-dark')
             }

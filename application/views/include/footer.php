@@ -50,7 +50,20 @@
 
 </script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/jquery.toast.js"></script>
-<script>
+<script>//
+    function leadsdatatable(){
+        //datatable-role
+        //Buttons examples
+        table = $('#datatable-leads').DataTable();
+        table.destroy();
+        var table = $('#datatable-leads').DataTable({
+            "ajax": "<?=base_url()?>leads/response",
+            dom: 'Blfrtip'
+        });
+
+        table.buttons().container()
+            .appendTo('#datatable-leads_wrapper .col-md-6:eq(0)');
+    }
     function roledatatable(){
         //datatable-role
         //Buttons examples
@@ -64,6 +77,7 @@
         table.buttons().container()
             .appendTo('#datatable-role_wrapper .col-md-6:eq(0)');
     }
+
     function companydatatable(){
         //Buttons examples
         table = $('#datatable-company').DataTable();
@@ -110,7 +124,7 @@
             .appendTo('#datatable-region_wrapper .col-md-6:eq(0)');
     }
     $(document).ready(function() {
-        
+        //window.open("mypage.html","mywindowname", "toolbar=no,menubar=no");
         var user = '<?=$_SESSION["is_login"]?>';
         <?php if($this->uri->segment(1)=='company' && $this->uri->segment(2)=='add'){
         ?>
@@ -124,6 +138,7 @@
             }
             <?php
         }?>
+        leadsdatatable();
         regiondatatable();
         teamdatatable();
         roledatatable();

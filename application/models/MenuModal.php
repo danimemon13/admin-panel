@@ -261,7 +261,7 @@ class MenuModal extends CI_Model {
             foreach ($menu['parents'][$parent] as $itemId) {
                 if (!isset($menu['parents'][$itemId])) {
                     if($menu['items'][$itemId]->MenuParent==0){
-                    $html .= '<option>';
+                    $html .= '<option value="'.$menu['items'][$itemId]->MenuLink.'">';
                     //$html .= '<a href="'.base_url().''.$menu['items'][$itemId]->MenuLink.'">';
                     //$html .= '<i data-feather="'.$menu['items'][$itemId]->MenuIcon.'" class="'.$menu['items'][$itemId]->MenuIcon.'"></i>';
                     //$html .= '<span data-key="t-dashboard'.$itemId.'">'.$menu['items'][$itemId]->MenuName.'</span>';
@@ -269,7 +269,7 @@ class MenuModal extends CI_Model {
                     $html .= $menu['items'][$itemId]->MenuName;
                     $html .= '</option>';
                     if($menu['items'][$itemId]->add_access==1){
-                        $html .= '<option>';
+                        $html .= '<option value="'.$menu['items'][$itemId]->MenuLink.'">';
                         //$html .= '<a href="'.base_url().''.$menu['items'][$itemId]->MenuLink.'">';
                         //$html .= '<i data-feather="'.$menu['items'][$itemId]->MenuIcon.'" class="'.$menu['items'][$itemId]->MenuIcon.'"></i>';
                         //$html .= '<span data-key="t-dashboard'.$itemId.'">'.$menu['items'][$itemId]->MenuName.'</span>';
@@ -284,7 +284,7 @@ class MenuModal extends CI_Model {
                     //$html .= '<span data-key="t-calendar'.$itemId.'">'.$menu['items'][$itemId]->MenuName.'</span>';
                     //$html .= '</a>';
                     //$html .= '</li>'
-                    $html .= '<option>';
+                    $html .= '<option value="'.$menu['items'][$itemId]->MenuLink.'">';
                     //$html .= '<a href="'.base_url().''.$menu['items'][$itemId]->MenuLink.'">';
                     //$html .= '<i data-feather="'.$menu['items'][$itemId]->MenuIcon.'" class="'.$menu['items'][$itemId]->MenuIcon.'"></i>';
                     //$html .= '<span data-key="t-dashboard'.$itemId.'">'.$menu['items'][$itemId]->MenuName.'</span>';
@@ -292,7 +292,7 @@ class MenuModal extends CI_Model {
                     $html .= $menu['items'][$itemId]->MenuName;
                     $html .= '</option>';
                     if($menu['items'][$itemId]->add_access==1){
-                        $html .= '<option>';
+                        $html .= '<option value="'.$menu['items'][$itemId]->MenuLink.'">';
                         //$html .= '<a href="'.base_url().''.$menu['items'][$itemId]->MenuLink.'">';
                         //$html .= '<i data-feather="'.$menu['items'][$itemId]->MenuIcon.'" class="'.$menu['items'][$itemId]->MenuIcon.'"></i>';
                         //$html .= '<span data-key="t-dashboard'.$itemId.'">'.$menu['items'][$itemId]->MenuName.'</span>';
