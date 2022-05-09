@@ -5,7 +5,10 @@ class BrandModal extends CI_Model {
     public function EditBrand(){}
     public function DeleteBrand(){}
     public function ShowBrand(){
-        
+        $this->db->select('*');
+        $this->db->from("me_brands");
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     public function AddMarketingPreference(){}

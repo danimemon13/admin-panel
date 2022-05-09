@@ -26,7 +26,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title"><a class="btn btn-primary waves-effect waves-light" href="<?=base_url()?>company/add">Add New Company</a></h4>
+                                <h4 class="card-title"><a class="btn btn-primary waves-effect waves-light" href="<?=base_url()?>leads/add">Add New Leads</a></h4>
                             </div>
                             <div class="card-body">
                                 <table id="datatable-leads" class="table table-bordered dt-responsive nowrap w-100">

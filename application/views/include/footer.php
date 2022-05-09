@@ -64,6 +64,19 @@
         table.buttons().container()
             .appendTo('#datatable-leads_wrapper .col-md-6:eq(0)');
     }
+    function invoicedatatable(){
+        //datatable-role
+        //Buttons examples
+        table = $('#datatable-invoice').DataTable();
+        table.destroy();
+        var table = $('#datatable-invoice').DataTable({
+            "ajax": "<?=base_url()?>invoice/response",
+            dom: 'Blfrtip'
+        });
+
+        table.buttons().container()
+            .appendTo('#datatable-invoice_wrapper .col-md-6:eq(0)');
+    }
     function roledatatable(){
         //datatable-role
         //Buttons examples
@@ -125,7 +138,7 @@
     }
     $(document).ready(function() {
         //window.open("mypage.html","mywindowname", "toolbar=no,menubar=no");
-        var user = '<?=$_SESSION["is_login"]?>';
+        var user = '<?=$_SESSION["is_logindetail"][0]["UserID"]?>';
         <?php if($this->uri->segment(1)=='company' && $this->uri->segment(2)=='add'){
         ?>
         
@@ -144,11 +157,12 @@
         roledatatable();
         companydatatable();
         departmentdatatable();
+        invoicedatatable();
            
     });
     function delete_company(CompanyID){
         var CompanyID = CompanyID;
-        var user = '<?=$_SESSION["is_login"]?>';
+        var user = '<?=$_SESSION["is_logindetail"][0]["UserID"]?>';
         bootbox.dialog({
             message: "Are you sure you want to Delete ?",
             title: "<i class='glyphicon glyphicon-trash'></i> Delete !",
@@ -188,7 +202,7 @@
     }
     function delete_department(DeparmentID){
         var DeparmentID = DeparmentID;
-        var user = '<?=$_SESSION["is_login"]?>';
+        var user = '<?=$_SESSION["is_logindetail"][0]["UserID"]?>';
         bootbox.dialog({
             message: "Are you sure you want to Delete ?",
             title: "<i class='glyphicon glyphicon-trash'></i> Delete !",
@@ -228,7 +242,7 @@
     }
     function delete_role(RoleID){
         var RoleID = RoleID;
-        var user = '<?=$_SESSION["is_login"]?>';
+        var user = '<?=$_SESSION["is_logindetail"][0]["UserID"]?>';
         bootbox.dialog({
             message: "Are you sure you want to Delete ?",
             title: "<i class='glyphicon glyphicon-trash'></i> Delete !",
@@ -358,7 +372,7 @@
             });
             departmentdatatable();
         });
-        var user = '<?=$_SESSION["is_login"]?>';
+        var user = '<?=$_SESSION["is_logindetail"][0]["UserID"]?>';
         /*Company Functions */
         $("#company_form").submit(function(e){
             e.preventDefault();
@@ -592,6 +606,68 @@
                 success: function (data) {
                     $(".modal-body").html(data);
                     $("#exampleModalToggleLabel").html("Team Details")
+                    $("#firstmodal").modal('toggle');
+                    socket.emit( 'addRole', { userid: user, message: "New Department Added" } );
+                    
+                },
+                complete: function() {
+                    spinner.hide();
+                    
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+        /* Leads Function */
+        //
+        $("#lead_form").submit(function(e){
+            e.preventDefault();
+            var spinner = $('#loading');
+            
+            var formData = new FormData(this);
+            $.ajax({
+                url: '<?=base_url()?>leads/process',
+                type: 'POST',
+                data: formData,
+                beforeSend: function() {
+                    // setting a timeout
+                    spinner.show();
+                },
+                success: function (data) {
+                    $(".modal-body").html(data);
+                    $("#exampleModalToggleLabel").html("Leads Details")
+                    $("#firstmodal").modal('toggle');
+                    socket.emit( 'addRole', { userid: user, message: "New Department Added" } );
+                    
+                },
+                complete: function() {
+                    spinner.hide();
+                    
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+        /*Leads Function END*/
+        //invoice_form
+        $("#invoice_form").submit(function(e){
+            e.preventDefault();
+            var spinner = $('#loading');
+            
+            var formData = new FormData(this);
+            $.ajax({
+                url: '<?=base_url()?>invoice/process',
+                type: 'POST',
+                data: formData,
+                beforeSend: function() {
+                    // setting a timeout
+                    spinner.show();
+                },
+                success: function (data) {
+                    $(".modal-body").html(data);
+                    $("#exampleModalToggleLabel").html("Invoice Details")
                     $("#firstmodal").modal('toggle');
                     socket.emit( 'addRole', { userid: user, message: "New Department Added" } );
                     

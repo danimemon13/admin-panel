@@ -20,7 +20,7 @@ class Home extends CI_Controller {
 	 */
 	function __construct() {
         parent::__construct();
-		$this->session->set_userdata("is_login","1");
+		//$this->session->set_userdata("is_login","1");
 		if(isset($_SESSION["menu_align"])){}
 		else{
 			$this->session->set_userdata("menu_align","non-horizontal");
@@ -35,12 +35,18 @@ class Home extends CI_Controller {
 	}
     public function dashboard(){
 		
-		$role_id = 1;
+		$role_id=$_SESSION["is_logindetail"][0]["RoleID"];
 		//$this->session->userdata('menu_align');
 		$condition = "me_menu_access.RoleID =" . "'" . $role_id . "' and me_menu.MenuLink='dashboard' and me_menu_access.view_access =1";
         $data["access"] = $this->menumodal->ShowMenuBySearch($condition);
+		
 		if(!empty($data["access"])){
-			$this->load->template('dashboard/admin','',1);
+			if($role_id==1){
+				$this->load->template('dashboard/admin','',1);
+			}
+			if($role_id==14){
+				$this->load->template('dashboard/sales','',1);
+			}
 		}
 		else{
 			$this->load->template('error/permission',$data,1);

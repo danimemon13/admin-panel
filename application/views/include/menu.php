@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="index.php" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="<?=base_url()?>assets/images/logo-sm.svg" alt="" height="24">
+                        <img src="<?=base_url()?>assets/menu.png" alt="" height="24">
                     </span>
                     <span class="logo-lg">
-                        <img src="<?=base_url()?>assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Minia</span>
+                        <img src="<?=base_url()?>assets/menu.png" alt="" height="24"> <span class="logo-txt">GOT IT</span>
                     </span>
                 </a>
 
                 <a href="index.php" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="<?=base_url()?>assets/images/logo-sm.svg" alt="" height="24">
+                        <img src="<?=base_url()?>assets/menu.png" alt="" height="24">
                     </span>
                     <span class="logo-lg">
-                        <img src="<?=base_url()?>assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Minia</span>
+                        <img src="<?=base_url()?>assets/menu.png" alt="" height="24"> <span class="logo-txt">GOT IT</span>
                     </span>
                 </a>
             </div>
@@ -241,7 +241,7 @@
                     <a class="dropdown-item" href="apps-contacts-profile.php"><i class="mdi mdi-face-profile font-size-16 align-middle me-1"></i> <?php echo $Profile; ?></a>
                     <a class="dropdown-item" href="auth-lock-screen.php"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i> <?php echo $Lock_screen; ?> </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="logout.php"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> <?php echo $Logout; ?></a>
+                    <a class="dropdown-item" href="<?=base_url()?>logout"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> <?php echo $Logout; ?></a>
                 </div>
             </div>
 

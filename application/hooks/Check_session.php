@@ -19,7 +19,7 @@ class Check_session
         }
         public function validate()
         {   
-               if (in_array($this->router->method, array("login","login_user")))//login is a sample login controller
+               if (in_array($this->router->method, array("login","login_user","process")))//login is a sample login controller
                 {
                         return;
                 }

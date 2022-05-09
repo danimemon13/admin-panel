@@ -143,4 +143,8 @@ $autoload['model'] = array('BrandModal' => 'brandmodal'
                           ,'RoleModal' => 'rolemodal'
                           ,'ShiftModal' => 'shiftmodal'
                           ,'TeamModal' => 'teammodal'
-                          ,'UsersModal' => 'usersmodal');
+                          ,'UsersModal' => 'usersmodal'
+                          ,'LeadModal' => 'leadmodal'
+                          ,'InvoiceModal' => 'invoicemodal'
+                          ,'PaymentModal' => 'paymentmodal'
+                          ,'LoginModal' => 'loginmodal');
